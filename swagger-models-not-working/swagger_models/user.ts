@@ -4,7 +4,7 @@ export class User implements SwaggerModel {
     @OptionalProperty
     name: string
     password: string
-    friends: Friend[]
+    friends: Friend[];
 
     @IgnoreProperty
     init?(user: any) {
@@ -14,24 +14,23 @@ export class User implements SwaggerModel {
     }
 
     getExample?() {
-        this.name = "name"
-        this.password = "password"
+        this.name = "name";
+        this.password = "password";
         // Problem seems to be related to nested classes. 
         // If I include User here it won't throw an error but it also won't show up as a property on the swagger page.
-        this.friends = [new Friend()]
+        const friend = new Friend();
+        friend.name = "ujjwal";
+        this.friends = [friend];
     }
 }
 
-class Friend implements SwaggerModel {
+export class Friend implements SwaggerModel {
     @OptionalProperty
-    name: string
+    name: string;
 
-    @IgnoreProperty
-    init?(user: any) {
-        this.name = user.name
-    }
+
 
     getExample?() {
-        this.name = "name"
+        this.name = "name";
     }
 }
